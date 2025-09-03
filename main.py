@@ -10,7 +10,7 @@ load_dotenv()
 # Initialize Hugging Face client
 client = InferenceClient(
     provider="hf-inference",
-    api_key=os.environ["HF_TOKEN"],  # Make sure your .env has HF_TOKEN=<your-token>
+    api_key=os.environ["HF_TOKEN"], 
 )
 
 # Set Streamlit app config
@@ -43,7 +43,7 @@ if user_input:
 
             raw_answer = response.choices[0].message.content.strip()
 
-            # 🔥 Remove <think>...</think> content using regex
+            #  Remove <think>...</think> content using regex
             cleaned_answer = re.sub(r"<think>.*?</think>", "", raw_answer, flags=re.DOTALL).strip()
 
         except Exception as e:
@@ -52,3 +52,4 @@ if user_input:
     # Add assistant's response to chat history
     st.session_state.chat_history.append({"role": "assistant", "content": cleaned_answer})
     st.chat_message("assistant").markdown(cleaned_answer)
+
